@@ -27,3 +27,5 @@ select * from film where title not like '%_m';
 select * from film where title not like '%o_';
 select * from actor where actor_id is null;
 select * from actor where actor_id is not null;
+select * from city limit 10;
+select * from city limit 10 offset 5;

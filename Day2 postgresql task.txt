@@ -1,0 +1,79 @@
+1) select staff_id,sum(amount) from payment group by staff_id;
+
+2) select min(amount) from payment;
+
+3) select max(amount) from payment;
+
+4) select avg(amount) from payment;
+
+5) select count(*) from payment where amount=(select min(amount) from payment);
+
+6) select staff_id,count(customer_id) as "Total Customers" from payment 
+   where amount=2.99 
+   group by staff_id 
+   having count(customer_id)>5 
+   order by staff_id;
+
+7) select staff_id,count(customer_id) as "Total Customers" from payment 
+   where amount=2.99 
+   group by staff_id 
+   having count(customer_id)>5 
+   order by staff_id 
+   limit 1;
+
+8) select staff_id,count(customer_id) as "Total Customers" from payment 
+  where amount=2.99 
+  group by staff_id 
+  having count(customer_id)>5 
+  order by staff_id 
+  limit 1 
+  offset 1;
+
+9) select count(*) from payment p1 where amount = (
+    select min(p2.amount)
+    from payment p2
+    where p2.amount = p1.amount
+);
+
+10) select customer_id,rental_id,amount from payment p
+where exists (
+	select 1 from customer c	
+	where p.customer_id=c.customer_id
+);
+
+11) select customer_id,rental_id,amount from payment p
+where not exists (
+	select 1 from customer c	
+	where p.customer_id=c.customer_id
+);
+
+12) select * from payment where amount > any 
+(select amount from payment where staff_id=2);
+
+13) select * from payment where amount > all
+(select amount from payment where staff_id=2);
+
+14) select first_name || ' ' || last_name as "customer name" from customer
+union
+select first_name || ' ' || last_name as "staff name" from staff;
+
+15) select first_name || ' ' || last_name as "customer name" from customer
+intersect
+select first_name || ' ' || last_name as "staff name" from staff;
+
+16) select first_name || ' ' || last_name as "customer name" from customer
+union all
+select first_name || ' ' || last_name as "staff name" from staff;
+
+17) select first_name || ' ' || last_name as "customer name" from customer
+except
+select first_name || ' ' || last_name as "staff name" from staff;
+
+18) select nullif(amount, 2.99) as filtered_amount
+from payment;
+
+19) select nullif(amount, 12.99) as filtered_amount
+from payment;
+
+20) select nullif(amount, 1.99) as filtered_amount
+from payment;
