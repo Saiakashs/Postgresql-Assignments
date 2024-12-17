@@ -28,4 +28,3 @@
 28) select * from actor where actor_id is not null;
 29) select * from city limit 10;
 30) select * from city limit 10 offset 5;
-
